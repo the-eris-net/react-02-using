@@ -8,12 +8,14 @@ function App() {
   });
 
   const decreaseMoney = () => {
-    setUser({ ...user, money: user.money - 1000 });
+    user.money -= 1000;
+    setUser(user);
     console.log(user);
   };
 
   const increaseAge = () => {
-    setUser(Object.assign({}, user, { age: user.age + 1 }));
+    user.age += 1;
+    setUser(structuredClone(user));
     console.log(user);
   };
 
