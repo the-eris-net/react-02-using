@@ -17,20 +17,51 @@ const FEED_ITEM = [
   { user: '애시', content: '사육사 자식 또 이렇게 해놨네' },
 ];
 
+function NavigationItem({ icon, name }) {
+  return (
+    <li style={{ listStyle: 'none', marginBottom: 10 }}>
+      <strong>{icon}</strong>
+      <span>{name}</span>
+    </li>
+  );
+}
 
-function Navigation(props){
+function Navigation({ items }) {
   return (
     <nav style={{ marginRight: 50 }}>
       <h3>인스타그램</h3>
       <ul style={{ padding: 0 }}>
-        {props.items.map((navigationItem, key) => (
-          <li key={key} style={{ listStyle: 'none', marginBottom: 10 }}>
-            <strong>{navigationItem.icon}</strong>
-            <span>{navigationItem.name}</span>
-          </li>
+        {items.map((item, key) => (
+          <NavigationItem key={key} icon={item.icon} name={item.name} />
         ))}
       </ul>
     </nav>
+  );
+}
+
+function FeedItem({ user, content }) {
+  return (
+    <div
+      style={{
+        padding: 20,
+        borderBottom: '1px solid gray',
+      }}
+    >
+      <div>{user}</div>
+      <div>{content}</div>
+    </div>
+  );
+}
+
+function Feed({ feedItems }) {
+  return (
+    <div>
+      {feedItems.map((feedItem, key) => (
+        <FeedItem key={key} 
+          user={feedItem.user} 
+          content={feedItem.content} />
+      ))}
+    </div>
   );
 }
 
@@ -38,9 +69,7 @@ function App() {
   return (
     <div style={{ display: 'flex' }}>
       <Navigation items={NAVIGATION_ITEM} />
-      <main>
-        ...
-      </main>
+      <Feed feedItems={FEED_ITEM} />
     </div>
   );
 }
